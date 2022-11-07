@@ -1,0 +1,25 @@
+version: '3.4'
+
+services:
+  frontend:
+    image: frontend
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./ ./
+      - ./
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./ ./
+      - ./
+    command: ["npm", "run", "test"]
