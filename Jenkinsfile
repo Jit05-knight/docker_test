@@ -8,27 +8,15 @@ pipeline {
     }
     stage("Clone Repo"){
       steps {
-        sh "git clone https://github.com/Jit05-knight/simple-java-maven-app"
+        sh "git clone https://github.com/Jit05-knight/docker_test"
       }
     }
     stage("Build"){
       steps {
-        dir("simple-java-maven-app") {
-          sh "mvn clean install"
+        dir("docker_test") {
+          sh ".jenkins.yml"
         }
       }
     }
-    stage("Test"){
-      steps{
-        dir("simple-java-maven-app") {
-          sh "mvn test"
-      }
-    }
   }
-  stage("Build Remote"){
-    steps{
-      build job: 'boolPipeline', parameters: [[$class: 'BooleanParameterValue', name: 'myBoolean', value: true ]]
-    }
-  }
-}
 }
